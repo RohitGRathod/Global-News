@@ -48,35 +48,41 @@ This project fetches **real-time English news** by **country** and **category** 
    ```bash
    git clone https://github.com/RohitGRathod/Global-News.git
 2. **Install Dependencies**
+    ```bash
     npm install
 3. **Create a .env file in root directory**
+    ```bash
     VITE_NEWS_API_KEY= "b1df8e94cb7042cfb69ba642580a36bf"
 4. **Run locally**
+    ```bash
     npm run dev
-    node index.js <!--for running backend service -->
+    node index.js 
 
 **File Structure**
-    ├── src/
-│    ├── Components/
-│    │    └── Footer/
-|    |    |    └── Footer.jsx           #Footer of the page
-|    |    └── SearchBar/
-|    |    |    └── SearchBar.jsx        #SearchBar for categories and searching the news
-|    |    └── SkeletonCard/
-|    |    |   └── SkeletonCard.jsx      #For Skeleton loading of webpage
-|    |    └── Loader.jsx                #Loader of webpage
-|    |    └── PostCard.jsx              #News Postcard
-|    |    └── SearchContext.js          #context of category and country
-|    |    └── index.js
-|    |
-|    |       
-│    ├── config/
-│    │   └── config.js        # Imports the api key from .env
-│    ├── Pages/
-│    │   └── Home.jsx            # Main news feed page
-|        └── News.jsx            #Detailed view of news
-│    ├── App.jsx
-│    └── main.jsx
-├── .env
-├── package.json
-└── README.md
+```bash
+├── src/
+│ ├── Components/
+│ │ ├── Footer/
+│ │ │ └── Footer.jsx # Footer of the page
+│ │ ├── SearchBar/
+│ │ │ └── SearchBar.jsx # Search bar for categories and news
+│ │ ├── SkeletonCard/
+│ │ │ └── SkeletonCard.jsx # Skeleton loading UI for smooth transitions
+│ │ ├── Loader.jsx # Global page loader component
+│ │ ├── PostCard.jsx # Individual news post card component
+│ │ ├── SearchContext.js # Context for managing category and country state
+│ │ └── index.js # Component export entry point
+│ │
+│ ├── config/
+│ │ └── config.js # Imports API key from .env and exports constants
+│ │
+│ ├── Pages/
+│ │ ├── Home.jsx # Main news feed page
+│ │ └── News.jsx # Detailed view of a single news article
+│ │
+│ ├── App.jsx # Root component handling routing
+│ └── main.jsx # React entry point
+│
+├── .env # Environment variables (e.g., API key)
+├── package.json # Dependencies and scripts
+└── README.md # Project documentation

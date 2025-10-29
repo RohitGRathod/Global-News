@@ -15,7 +15,7 @@ function News() {
     async function handleReadMore(newsUrl) {
       if (!newsUrl) return setLoading(false);
       try {
-        const response = await fetch(`http://localhost:5000/extract?url=${encodeURIComponent(newsUrl)}`);
+        const response = await fetch(`/api/extract?url=${encodeURIComponent(newsUrl)}`);
         const article = await response.json();
         setFullContent(article.content);
       } catch (err) {

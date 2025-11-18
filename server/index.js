@@ -6,14 +6,14 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 
-app.get("/extract", async (req, res) => {
+app.get("/app", async (req, res) => {
   const articleUrl = req.query.url;
   if (!articleUrl) {
     return res.status(400).json({ error: "Missing URL" });
   }
 
   try {
-     const controller = new AbortController();
+    const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000); 
     const response = await fetch(articleUrl, {
       headers: {

@@ -6,6 +6,10 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 
+
+
+
+
 app.get("/app", async (req, res) => {
   const articleUrl = req.query.url;
   if (!articleUrl) {
@@ -41,4 +45,6 @@ app.get("/app", async (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});

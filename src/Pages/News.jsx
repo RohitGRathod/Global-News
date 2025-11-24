@@ -11,22 +11,54 @@ function News() {
 
   //Function for web scraping full article content
   
-  useEffect(() => {
-    async function handleReadMore(newsUrl) {
-      if (!newsUrl) return setLoading(false);
-      try {
-        const response = await fetch(`https://global-news-backend-2.onrender.com/app?url=${encodeURIComponent(newsUrl)}`);
-        const article = await response.json();
-        setFullContent(article.content);
-      } catch (err) {
-        console.error("Error fetching article:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
+  // useEffect(() => {
+  //   async function handleReadMore(newsUrl) {
+  //     if (!newsUrl) return setLoading(false);
+  //     try {
+  //       const response = await fetch(`https://global-news-backend-2.onrender.com/app?url=${encodeURIComponent(newsUrl)}`);
+  //       const article = await response.json();
+  //       setFullContent(article.content);
+  //     } catch (err) {
+  //       console.error("Error fetching article:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
 
-    handleReadMore(url);
-  }, [url]);
+  //   handleReadMore(url);
+  // }, [url]);
+async function fetchWithRetry(url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP Error " + res.status);
+      return await res.json();
+    } catch (err) {
+      console.warn(`Attempt ${i + 1} failed:`, err.message);
+      await new Promise(r => setTimeout(r, 1500));
+    }
+  }
+  throw new Error("All retries failed");
+}
+
+  useEffect(() => {
+  async function handleReadMore(newsUrl) {
+    if (!newsUrl) return setLoading(false);
+
+    try {
+      const article = await fetchWithRetry(
+        `https://global-news-backend-2.onrender.com/app?url=${encodeURIComponent(newsUrl)}`
+      );
+      setFullContent(article.content);
+    } catch (err) {
+      console.error("Error fetching article:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  handleReadMore(url);
+}, [url]);
 
   if (!state) {
     return (

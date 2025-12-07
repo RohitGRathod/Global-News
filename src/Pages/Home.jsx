@@ -147,6 +147,8 @@ function Home() {
   const [totalResults, setTotalResults] = useState(0);
 
   const apiKey = config.apiKey;
+  console.log("Config:", config);
+  console.log("API Key:", apiKey);
 
 
 

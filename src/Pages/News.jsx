@@ -15,7 +15,7 @@ function News() {
     async function handleReadMore(newsUrl) {
       if (!newsUrl) return setLoading(false);
       try {
-        const response = await fetch(`https://global-news-backend.vercel.app/api?url=${encodeURIComponent(newsUrl)}`);
+        const response = await fetch(`https://global-news-backend.vercel.app/api/app?url=${encodeURIComponent(newsUrl)}`);
         const article = await response.json();
         setFullContent(article.content);
       } catch (err) {

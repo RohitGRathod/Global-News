@@ -194,6 +194,9 @@ function Home() {
   } catch (error) {
     console.error('Error fetching news:', error);
     if (!isLoadMore) setNewsData([]);
+  } finally {
+    setLoading(false);
+    setFetchingMore(false);
   }
 }
 

@@ -158,46 +158,60 @@ function Home() {
     if (isLoadMore) setFetchingMore(true);
     else setLoading(true);
 
-    try {
-      // let url;
-      //We have two different endpoints for US and other countries
-      //That is because we are on a free plan of newsapi so we cannot access top-headlines for other countries except US for that purpose we have used other countries names as keyword in everything endpoint
-    //   if (country === 'us') {
-    //     url = `https://newsapi.org/v2/top-headlines?country=${country}&page=${page}&apiKey=${apiKey}`;
-    //     if (category) url += `&category=${category.toLowerCase()}`;
-    //     if (keyword) url += `&q=${encodeURIComponent(keyword)}`;
-    //   } else {
-    //     const domains = domainsByCountry[country] || '';
-    //     const query = keyword || category || 'news';
-    //     url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${page}&language=en${domains ? `&domains=${domains}` : ''}&apiKey=${apiKey}`;
-    //   }
+//     try {
+//       // let url;
+//       //We have two different endpoints for US and other countries
+//       //That is because we are on a free plan of newsapi so we cannot access top-headlines for other countries except US for that purpose we have used other countries names as keyword in everything endpoint
+//     //   if (country === 'us') {
+//     //     url = `https://newsapi.org/v2/top-headlines?country=${country}&page=${page}&apiKey=${apiKey}`;
+//     //     if (category) url += `&category=${category.toLowerCase()}`;
+//     //     if (keyword) url += `&q=${encodeURIComponent(keyword)}`;
+//     //   } else {
+//     //     const domains = domainsByCountry[country] || '';
+//     //     const query = keyword || category || 'news';
+//     //     url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${page}&language=en${domains ? `&domains=${domains}` : ''}&apiKey=${apiKey}`;
+//     //   }
 
-    //   const res = await fetch(url);
-    //   const data = await res.json();
+//     //   const res = await fetch(url);
+//     //   const data = await res.json();
 
-    //   if (data?.articles) {
-    //     setNewsData(prev => isLoadMore ? [...prev, ...data.articles] : data.articles);
-    //     setTotalResults(data.totalResults || 0);
-    //   } else {
-    //     setNewsData([]);
-    //   }
-    // } catch (error) {
-    //   console.error('Error fetching news:', error);
-    //   if (!isLoadMore) setNewsData([]);
-    // } finally {
-    //   setLoading(false);
-    //   setFetchingMore(false);
-    // }
-    const url = `${backendUrl}?country=${country}&category=${category}&keyword=${keyword}&page=${page}`;
-    const res = await fetch(url);
-    setNewsData(prev => isLoadMore ? [...prev, ...res.json()] : res.json());
-  } catch (error) {
-    console.error('Error fetching news:', error);
-    if (!isLoadMore) setNewsData([]);
-  } finally {
-    setLoading(false);
-    setFetchingMore(false);
+//     //   if (data?.articles) {
+//     //     setNewsData(prev => isLoadMore ? [...prev, ...data.articles] : data.articles);
+//     //     setTotalResults(data.totalResults || 0);
+//     //   } else {
+//     //     setNewsData([]);
+//     //   }
+//     // } catch (error) {
+//     //   console.error('Error fetching news:', error);
+//     //   if (!isLoadMore) setNewsData([]);
+//     // } finally {
+//     //   setLoading(false);
+//     //   setFetchingMore(false);
+//     // }
+// }
+try {
+  const url = `${backendUrl}?country=${country}&category=${category}&keyword=${keyword}&page=${page}`;
+  const res = await fetch(url);
+
+  const data = await res.json();  
+
+  if (data?.articles) {
+    setNewsData(prev =>
+      isLoadMore ? [...prev, ...data.articles] : data.articles
+    );
+    setTotalResults(data.totalResults || 0);
+  } else {
+    setNewsData([]);
   }
+} catch (error) {
+  console.error("Error fetching news:", error);
+  if (!isLoadMore) setNewsData([]);
+} finally {
+  setLoading(false);
+  setFetchingMore(false);
+}
+
+   
 }
 
   // Re-fetch when category, country, or keyword changes

@@ -2,6 +2,18 @@ import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 
 export default async function handler(req, res) {
+  export default async function handler(req, res) {
+  // CORS FIX
+  res.setHeader("Access-Control-Allow-Origin", "https://global-news-nine.vercel.app");  
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // ---- your code below ----
+
   const articleUrl = req.query.url;
 
   if (!articleUrl) {

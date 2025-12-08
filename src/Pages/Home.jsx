@@ -146,9 +146,7 @@ function Home() {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const backendUrl = "https://global-news-backend.vercel.app/api/news";
-  const apiKey = config.apiKey;
-  console.log("Config:", config);
-  console.log("API Key:", apiKey);
+  
 
 
 
@@ -204,7 +202,7 @@ function Home() {
       dataLength={newsData.length}
       next={loadMore}
       hasMore={newsData.length < totalResults}
-      loader={loading && <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center w-11/12 mx-auto rounded-2xl bg-gray-100 p-6 shadow-2xl mt-36">
+      loader={loading && fetchingMore && <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center w-11/12 mx-auto rounded-2xl bg-gray-100 p-6 shadow-2xl mt-36">
         {Array.from({ length: 6 }).map((_, idx) => (
           <SkeletonCard key={idx} />
         ))}

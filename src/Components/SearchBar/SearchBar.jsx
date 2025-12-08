@@ -108,7 +108,8 @@ function SearchBar() {
             className="px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm hover:shadow-md focus:ring-2 focus:ring-blue-400 transition cursor-pointer"
           >
             {categories.map((cat) => (
-              <option key={cat} value={cat}>
+              
+              <option key={cat} value={cat} >
                 {cat}
               </option>
             ))}
@@ -120,10 +121,10 @@ function SearchBar() {
           <select
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm hover:shadow-md focus:ring-2 focus:ring-blue-400 transition"
+            className="px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-800 shadow-sm hover:shadow-md focus:ring-2 focus:ring-blue-400 transition cursor-pointer"
           >
             {Object.entries(countries).map(([code, name]) => (
-              <option key={code} value={code}>
+              <option key={code} value={code} >
                 {name}
               </option>
             ))}
